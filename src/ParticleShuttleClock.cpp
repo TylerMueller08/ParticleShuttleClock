@@ -148,7 +148,7 @@ String getCurrentTime() {
 
 String getCurrentDate() {
   Time.zone(-7);
-  return Time.format("%B%e, %Y");
+  return Time.format("%B %e, %Y");
 }
 
 String getCurrentWeekDay(int offset) {
@@ -179,9 +179,59 @@ int centerTextX(String text, int textSize) {
 }
 
 void updateTemps() {
-  display.setTextColor(ILI9341_WHITE, ILI9341_BLACK); display.setTextSize(2); display.setCursor(32, 265); display.print(yesterdayTemp); display.setTextSize(1); display.setCursor(32+26, 260); display.print("o"); display.setTextColor(ILI9341_LIGHTGREY, ILI9341_BLACK); display.setCursor(32+26, 272); display.print("F");
-  display.setTextColor(ILI9341_WHITE, ILI9341_BLACK); display.setTextSize(2); display.setCursor(107, 265); display.print(todayTemp); display.setTextSize(1); display.setCursor(107+26, 260); display.print("o"); display.setTextColor(ILI9341_LIGHTGREY, ILI9341_BLACK); display.setCursor(107+26, 272); display.print("F");
-  display.setTextColor(ILI9341_WHITE, ILI9341_BLACK); display.setTextSize(2); display.setCursor(182, 265); display.print(tomorrowTemp); display.setTextSize(1); display.setCursor(182+26, 260); display.print("o"); display.setTextColor(ILI9341_LIGHTGREY, ILI9341_BLACK); display.setCursor(182+26, 272); display.print("F");
+  // Yesterday's Temperature
+  display.setTextColor(ILI9341_WHITE, ILI9341_BLACK);
+  display.setTextSize(2);
+  if (yesterdayTemp.toInt() <= -10) {
+    display.setCursor(32 - 20, 265);
+  } else if (yesterdayTemp.toInt() >= 0 && yesterdayTemp.toInt() <= 9) {
+    display.setCursor(32 + 12, 265);
+  } else {
+    display.setCursor(32, 265);
+  }
+  display.print(yesterdayTemp);
+  display.setTextSize(1);
+  display.setCursor(32+26, 260);
+  display.print("o");
+  display.setTextColor(ILI9341_LIGHTGREY, ILI9341_BLACK);
+  display.setCursor(32+26, 272);
+  display.print("F");
+
+  // Today's Temperature 
+  display.setTextColor(ILI9341_WHITE, ILI9341_BLACK);
+  display.setTextSize(2);
+  if (todayTemp.toInt() <= -10) {
+    display.setCursor(107 - 20, 265);
+  } else if (todayTemp.toInt() >= 0 && todayTemp.toInt() <= 9) {
+    display.setCursor(107 + 12, 265);
+  } else {
+    display.setCursor(107, 265);
+  }
+  display.print(todayTemp);
+  display.setTextSize(1);
+  display.setCursor(107+26, 260);
+  display.print("o");
+  display.setTextColor(ILI9341_LIGHTGREY, ILI9341_BLACK);
+  display.setCursor(107+26, 272);
+  display.print("F");
+
+  // Tomorrow's Temperature
+  display.setTextColor(ILI9341_WHITE, ILI9341_BLACK);
+  display.setTextSize(2);
+  if (tomorrowTemp.toInt() <= -10) {
+    display.setCursor(182 - 20, 265);
+  } else if (tomorrowTemp.toInt() >= 0 && tomorrowTemp.toInt() <= 9) {
+    display.setCursor(182 + 12, 265);
+  } else {
+    display.setCursor(182, 265);
+  }
+  display.print(tomorrowTemp);
+  display.setTextSize(1);
+  display.setCursor(182+26, 260);
+  display.print("o");
+  display.setTextColor(ILI9341_LIGHTGREY, ILI9341_BLACK);
+  display.setCursor(182+26, 272);
+  display.print("F");
 }
 
 uint8_t* getWeatherCode(String weatherCode) {
