@@ -33,9 +33,6 @@ int dayOfWeek = 0;
 
 int centerTextX(String text, int textSize);
 
-unsigned long previousMillis = 0;
-const long interval = 3600000;
-
 // Retrieve Temperature
 void temperatureHandler(const char *event, const char *tempData) {
   int index0, index1, index2;
@@ -142,15 +139,6 @@ void loop() {
     display.print(getCurrentTime());
   }
   delay(1000);
-
-  unsigned long currentMillis = millis();
-  if (currentMillis - previousMillis >= interval) {
-    String data = String(10);
-    Particle.publish("getTemp", data, PRIVATE);
-    Particle.publish("weatherCode", data, PRIVATE);
-
-    previousMillis = currentMillis;
-  }
 }
 
 String getCurrentTime() {
