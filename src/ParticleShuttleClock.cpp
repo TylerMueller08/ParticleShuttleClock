@@ -96,6 +96,8 @@ void updateTemps() {
   centerText("Today", 2, 170, 0);
   centerText(getAbbreviatedWeekDay(1), 2, 170, 75);
 
+  display.fillRect(10, 260, 220, 25, ILI9341_BLACK);
+
   centerText(yesterdayTemperature, 2, 265, -75);
   centerText(todayTemperature, 2, 265, 0);
   centerText(tomorrowTemperature, 2, 265, 75);
@@ -131,6 +133,10 @@ void weatherCodeHandler(const char *event, const char *weatherCodeData) {
 
   index2 = codeString.indexOf('~', index1+1);
   tomorrowCode = codeString.substring(index1+1, index2);
+
+  display.fillRect(15, 192, 60, 60, ILI9341_BLACK);
+  display.fillRect(90, 192, 60, 60, ILI9341_BLACK);
+  display.fillRect(165, 192, 60, 60, ILI9341_BLACK);
 
   display.drawBitmap(15, 192, getWeatherCode(yesterdayCode), 60, 60, ILI9341_WHITE);
   display.drawBitmap(90, 192, getWeatherCode(todayCode), 60, 60, ILI9341_WHITE);
