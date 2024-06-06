@@ -1,7 +1,7 @@
 /* 
  * Project: Particle Shuttle Clock
  * Author: Tyler Mueller
- * Last Updated: 1/14/2024
+ * Last Updated: 6/5/2024
 */
 
 
@@ -64,7 +64,7 @@ String getCurrentWeekDay(int offset) {
   }
 }
 String getCurrentDate() {
-  return Time.format("%B %e, %Y");
+  return Time.format("%B%e, %Y");
 }
 String getCurrentTime() {
   return Time.format("%I:%M %p");
@@ -121,9 +121,9 @@ void temperatureHandler(const char *event, const char *data) {
 
   updateTemps();
 }
-void weatherCodeHandler(const char *event, const char *weatherCodeData) {
+void weatherCodeHandler(const char *event, const char *data) {
   int index0, index1, index2;
-  String codeString = String(weatherCodeData);
+  String codeString = String(data);
 
   index0 = codeString.indexOf('~');
   yesterdayCode = codeString.substring(0, index0);
@@ -153,14 +153,14 @@ void setup() {
 
   screenLayout();
 
-  Particle.subscribe("hook-response/getTemperatures", temperatureHandler, MY_DEVICES);
-  Particle.subscribe("hook-response/weatherCode", weatherCodeHandler, MY_DEVICES);
+  Particle.subscribe(System.deviceID() + "/hook-response/getTemperatures/", temperatureHandler, MY_DEVICES);
+  Particle.subscribe(System.deviceID() + "/hook-response/weatherCode/", weatherCodeHandler, MY_DEVICES);
 
   callWebhooks();
 }
 
 void loop() {
-  Time.zone(-7);
+  Time.zone(-6);
 
   int currentSecond = Time.second();
   int currentMinute = Time.minute();

@@ -6,6 +6,6 @@
         "cmath": "cpp"
     },
     "particle.targetDevice": "e00fce682e6cd321f272ecf6",
-    "particle.firmwareVersion": "4.2.0",
+    "particle.firmwareVersion": "5.8.0",
     "particle.targetPlatform": "boron"
 }
