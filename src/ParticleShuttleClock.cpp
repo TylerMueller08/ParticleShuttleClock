@@ -149,19 +149,18 @@ void callWebhooks() {
 }
 
 void setup() {
-  display.begin();
+  Time.zone(-6);
 
+  display.begin();
   screenLayout();
 
-  Particle.subscribe(System.deviceID() + "/hook-response/getTemperatures/", temperatureHandler, MY_DEVICES);
-  Particle.subscribe(System.deviceID() + "/hook-response/weatherCode/", weatherCodeHandler, MY_DEVICES);
+  Particle.subscribe(System.deviceID() + "/hook-response/getTemperatures/", temperatureHandler);
+  Particle.subscribe(System.deviceID() + "/hook-response/weatherCode/", weatherCodeHandler);
 
   callWebhooks();
 }
 
 void loop() {
-  Time.zone(-6);
-
   int currentSecond = Time.second();
   int currentMinute = Time.minute();
   int currentHour = Time.hour();
